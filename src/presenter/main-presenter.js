@@ -2,7 +2,7 @@ import AddEventsList from '../view/add-events-list.js';
 import EditForm from '../view/edit-form.js';
 import WayPoint from '../view/way-point.js';
 import Sorting from '../view/sorting.js';
-import {render} from '../render.js';
+import {render} from '../framework/render.js';
 
 
 export default class MainPresenter {
@@ -18,10 +18,10 @@ export default class MainPresenter {
     this.pointsModel = [...this.pointsModel.getPoints()];
     render (this.Sorting, this.container);
     render(this.EventsList, this.container);
-    render(new EditForm(), this.EventsList.getElement());
+    render(new EditForm(), this.EventsList.element);
 
     for (let i = 0; i < this.pointsModel.length; i++) {
-      render(new WayPoint({points:this.pointsModel[i]}), this.EventsList.getElement());
+      render(new WayPoint({points:this.pointsModel[i]}), this.EventsList.element);
     }
   }
 }
