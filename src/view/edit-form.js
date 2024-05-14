@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view';
 
 /**
  * редактирование имеющеся точки маршрута
@@ -163,20 +163,8 @@ function createEditFormTemplate() {
     `);
 }
 
-export default class EditForm {
-  getTemplate() {
+export default class EditForm extends AbstractView {
+  get template() {
     return createEditFormTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }
