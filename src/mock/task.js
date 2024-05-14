@@ -1,21 +1,21 @@
 /**
  * Массив точек маршрута состоит из объектов
  * Объект - точка маршрута состоит из следующих полей
- * id: @param string
- * basePrice: @param number
- * dateFrom: @param string
- * dateTo: @param string
- * destination: @param string
- * isFavorite: @param boolean
- * offers: @param [string]
- * type: @param enum, string
+ * @param id:  string
+ * @param basePrice:  number
+ * @param dateFrom:  string
+ * @param dateTo:  string
+ * @param destination:  string
+ * @param isFavorite: boolean
+ * @param offers: [string]
+ * @param type: enum, string
  */
 const mockPoints = [
   {
     id: '1',
     basePrice: 1100,
-    dateFrom: '2019-07-10T22:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2019-07-10T20:55:56.845Z',
+    dateTo: '2019-07-11T10:22:13.375Z',
     destination: '1',
     isFavorite: false,
     offers: [
@@ -26,7 +26,7 @@ const mockPoints = [
   {
     id: '2',
     basePrice: 1200,
-    dateFrom: '2019-07-10T22:55:56.845Z',
+    dateFrom: '2019-07-11T21:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
     destination: '2',
     isFavorite: true,
@@ -38,8 +38,8 @@ const mockPoints = [
   {
     id: '3',
     basePrice: 1300,
-    dateFrom: '2019-07-10T22:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2019-07-12T22:55:56.845Z',
+    dateTo: '2019-07-11T12:22:13.375Z',
     destination: '3',
     isFavorite: false,
     offers: [
