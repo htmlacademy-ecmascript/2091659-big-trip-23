@@ -8,7 +8,12 @@ import { DateFormat } from '../const.js';
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
-
+/**
+ * Функции для преобразования полученных дат в привычный формат дат.
+ * @param {} date получаемые данные дат
+ * @param {string} dateFormat  шаблон по преобразованию формата даты
+ * @returns
+ */
 const humanizeDate = (date, dateFormat) => date ? dayjs(date).format(dateFormat) : '';
 
 const formatFullDate = (inputDate) => //задаем дату в полном формате
