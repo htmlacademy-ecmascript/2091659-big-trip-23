@@ -15,13 +15,15 @@ export default class MainPresenter {
   }
 
   init() {
-    this.pointsModel = [...this.pointsModel.getPoints()];
+    this.points = [...this.pointsModel.getPoints()];
+    this.destinationsData = [...this.pointsModel.getDestinations()];
+    this.offersData = [...this.pointsModel.getOffers()];
     render (this.Sorting, this.container);
     render(this.EventsList, this.container);
     render(new EditForm(), this.EventsList.element);
 
-    for (let i = 0; i < this.pointsModel.length; i++) {
-      render(new WayPoint({points:this.pointsModel[i]}), this.EventsList.element);
+    for (let i = 0; i < this.points.length; i++) {
+      render(new WayPoint({points:this.points[i], destinationsData:this.destinationsData, offersData:this.offers}), this.EventsList.element);
     }
   }
 }

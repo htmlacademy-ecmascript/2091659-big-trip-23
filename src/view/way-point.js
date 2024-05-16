@@ -6,8 +6,9 @@ import {humanizeDate} from '../utils/utils.js';
  * создание элемента списка точка маршрута
  * @returns {string} разметка точки маршрута
  */
-function createWayPointTemplate(points) {
+function createWayPointTemplate(points, destinationsData, offersData) {
   const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
+  const destinationObject = destinationsData.find((dest) => dest.id === destination);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
   const startDateInForm = humanizeDate(dateFrom, DateFormat.DATE_IN_FORM);
   const endDateInForm = humanizeDate(dateTo, DateFormat.DATE_IN_FORM);
@@ -23,7 +24,7 @@ function createWayPointTemplate(points) {
       <div class="event__type">
         <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">${type} Amsterdam</h3>
+      <h3 class="event__title">${type} ${destinationObject.name}</h3>
       <div class="event__schedule">
         <p class="event__time">
           <time class="event__start-time" datetime="${startDateInForm}">${startTime}</time>
@@ -59,12 +60,16 @@ function createWayPointTemplate(points) {
 
 export default class WayPoint extends AbstractView {
   #points = null;
-  constructor({points}) {
+  #destinationsData = null;
+  #offersData = null;
+  constructor({points, destinationsData, offersData}) {
     super();
     this.#points = points;
+    this.#destinationsData = destinationsData;
+    this.#offersData = offersData;
   }
 
   get template() {
-    return createWayPointTemplate(this.#points);
+    return createWayPointTemplate(this.#points, this.#destinationsData, this.#offersData);
   }
 }
