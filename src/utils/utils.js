@@ -1,16 +1,18 @@
 import dayjs from 'dayjs';
 import { DateFormat } from '../const.js';
+
 /**
  * Функция получения случайного элемента из массива
- * @param {*} массив
- * @returns элемент массива
+ * @template El
+ * @param {El[] | readonly El[]} items массив
+ * @returns {El} элемент массива
  */
 function getRandomArrayElement(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 /**
  * Функции для преобразования полученных дат в привычный формат дат.
- * @param {} date получаемые данные дат
+ * @param {string | number | Date | import('dayjs').Dayjs} date получаемые данные дат
  * @param {string} dateFormat  шаблон по преобразованию формата даты
  * @returns
  */
