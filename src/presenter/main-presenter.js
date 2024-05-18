@@ -29,14 +29,14 @@ export default class MainPresenter {
     render(this.#editForm, this.#eventsList.element);
 
     for (let i = 0; i < this.#points.length; i++) {
-      render(new WayPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData}), this.#eventsList.element);
-       // this.#renderPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData});
+      //render(new WayPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData}), this.#eventsList.element);
+      this.#renderPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData});
     }
   }
 
-  /*#renderPoint (points, destinationsData, offersData) {
-    const pointComponent = new WayPoint({points, destinationsData, offersData});
+  #renderPoint (points, destinationsData, offersData) {
+    const pointComponent = new WayPoint(points, destinationsData, offersData);
 
     render(pointComponent, this.#eventsList.element);
-  }*/
+  }
 }
