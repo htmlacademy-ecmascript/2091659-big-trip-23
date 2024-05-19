@@ -3,10 +3,42 @@ import {DateFormat} from '../const.js';
 import {humanizeDate} from '../utils/utils.js';
 
 /**
+ *
+ * @param {*} offers
+ * @param {*} offersData
+ * @returns {string}  разметка
+ */
+const createSelectedOffersItemTemplate = ({ title, price }) => `
+  <li class="event__offer">
+    <span class="event__offer-title">${title}</span>
+    &plus;&euro;&nbsp;
+    <span class="event__offer-price">${price}</span>
+  </li>
+`;
+
+const createSelectedOffersTemplate = (offersData) => {
+  if (offersData.length === 0) {
+    return '';
+  }
+  const offersTemplate = offersData
+    .map(({ title, price }) =>
+      createSelectedOffersItemTemplate({ title, price })
+    )
+    .join('');
+
+  return `
+    <ul class="event__selected-offers">
+      ${offersTemplate}
+    </ul>
+  `;
+};
+
+
+/**
  * создание элемента списка точка маршрута
  * @returns {string} разметка точки маршрута
  */
-function createWayPointTemplate(points, destinationsData, offersData) {
+function createWayPointTemplate({points, destinationsData, offersData}) {
   const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
   const destinationObject = destinationsData.find((dest) => dest.id === destination);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
@@ -16,6 +48,7 @@ function createWayPointTemplate(points, destinationsData, offersData) {
   const startDateShort = humanizeDate(dateFrom, DateFormat.DATE);
   const startTime = humanizeDate(dateFrom, DateFormat.TIME);
   const endTime = humanizeDate(dateTo, DateFormat.TIME);
+  const selectedOffersTemplate = createSelectedOffersTemplate(offersData);
   return (
     `
     <li class="trip-events__item">
@@ -37,13 +70,7 @@ function createWayPointTemplate(points, destinationsData, offersData) {
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
       </p>
       <h4 class="visually-hidden">Offers:</h4>
-      <ul class="event__selected-offers">
-        <li class="event__offer">
-          <span class="event__offer-title">Order Uber</span>
-          &plus;&euro;&nbsp;
-          <span class="event__offer-price">20</span>
-        </li>
-      </ul>
+      ${selectedOffersTemplate}
       <button class="event__favorite-btn ${ favoriteClassName }" type="button">
         <span class="visually-hidden">Add to favorite</span>
         <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
@@ -70,6 +97,6 @@ export default class WayPoint extends AbstractView {
   }
 
   get template() {
-    return createWayPointTemplate(this.#points, this.#destinationsData, this.#offersData);
+    return createWayPointTemplate({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
   }
 }
