@@ -140,6 +140,11 @@ const mockOffers = [
         title: 'Increase the weight of luggage',
         price: 120
       },
+      {
+        id: 3,
+        title: 'Increase the weight of luggage',
+        price: 220
+      },
     ]
   }
 ];
