@@ -38,7 +38,7 @@ const createSelectedOffersTemplate = (offersData) => {
  * создание элемента списка точка маршрута
  * @returns {string} разметка точки маршрута
  */
-function createWayPointTemplate({points, destinationsData, offersData}) {
+function createWayPointTemplate(points, destinationsData, offersData) {
   const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
   const destinationObject = destinationsData.find((dest) => dest.id === destination);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
@@ -97,6 +97,6 @@ export default class WayPoint extends AbstractView {
   }
 
   get template() {
-    return createWayPointTemplate({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
+    return createWayPointTemplate(this.#points, this.#destinationsData, this.#offersData);
   }
 }
