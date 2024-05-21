@@ -2,7 +2,7 @@ import AddEventsList from '../view/add-events-list.js';
 import EditForm from '../view/edit-form.js';
 import WayPoint from '../view/way-point.js';
 import Sorting from '../view/sorting.js';
-import {render} from '../framework/render.js';
+import {render, replace} from '../framework/render.js';
 
 
 export default class MainPresenter {
@@ -34,7 +34,30 @@ export default class MainPresenter {
   }
 
   #renderPoint ({points, destinationsData, offersData}) {
-    const pointComponent = new WayPoint({points, destinationsData, offersData});
+    const escKeyDownHandler = (evt) => {
+      if (evt.key === 'Escape') {
+        evt.preventDefault();
+        replaceFormToPoint();
+        document.removeEventListener('keydown', escKeyDownHandler);
+      }
+    };
+
+    const onEditClick = () => replacePointToForm();
+    const onFormSubmit = () => replaceFormToPoint();
+    const onFormCancel = () => replaceFormToPoint();
+
+    const pointComponent = new WayPoint({points, destinationsData, offersData, onEditClick: onEditClick,});
+    const formComponent = new EditForm({points, destinationsData, offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
+
+    function replacePointToForm() {
+      replace(formComponent, pointComponent);
+      document.addEventListener('keydown', escKeyDownHandler);
+    }
+
+    function replaceFormToPoint() {
+      replace(pointComponent, formComponent);
+      document.removeEventListener('keydown', escKeyDownHandler);
+    }
 
     render(pointComponent, this.#eventsList.element);
   }
