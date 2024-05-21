@@ -10,7 +10,6 @@ export default class MainPresenter {
   #pointsModel;
   #sorting = new Sorting();
   #eventsList = new AddEventsList();
-  #editForm = new EditForm();
   #points = [];
   #destinationsData = [];
   #offersData = [];
@@ -26,7 +25,8 @@ export default class MainPresenter {
     this.#offersData = [...this.#pointsModel.offers];
     render (this.#sorting, this.#container);
     render(this.#eventsList, this.#container);
-    render(this.#editForm, this.#eventsList.element);
+
+    this.#renderEditForm({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
 
     for (let i = 0; i < this.#points.length; i++) {
       this.#renderPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData});
@@ -37,5 +37,11 @@ export default class MainPresenter {
     const pointComponent = new WayPoint({points, destinationsData, offersData});
 
     render(pointComponent, this.#eventsList.element);
+  }
+
+  #renderEditForm ({points, destinationsData, offersData}) {
+    const formComponent = new EditForm({points, destinationsData, offersData});
+
+    render(formComponent, this.#eventsList.element);
   }
 }
