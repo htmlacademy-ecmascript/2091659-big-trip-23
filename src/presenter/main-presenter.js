@@ -36,7 +36,7 @@ export default class MainPresenter {
   #prepareOffersToShow(point) {
     const offers = this.#pointsModel.getOffersByType(point.type);
     const idx = new Set(point.offers);
-    return offers.filter((offer)=>idx.has(offer.id))
+    return offers.filter((offer)=>idx.has(offer.id));
   }
 
   #renderPoint ({point, destinationsData}) {
