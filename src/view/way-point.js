@@ -16,13 +16,12 @@ const createSelectedOffersItemTemplate = ({ title, price }) => `
   </li>
 `;
 
-const createSelectedOffersTemplate = (offersData) => {
-  if (offersData.length === 0) {
+const createSelectedOffersTemplate = (offers) => {
+  if (offers.length === 0) {
     return '';
   }
-  const offersTemplate = offersData
-    .map(({ title, price }) =>
-      createSelectedOffersItemTemplate({ title, price })
+  const offersTemplate = offers
+    .map(createSelectedOffersItemTemplate
     )
     .join('');
 
@@ -38,8 +37,8 @@ const createSelectedOffersTemplate = (offersData) => {
  * создание элемента списка точка маршрута
  * @returns {string} разметка точки маршрута
  */
-function createWayPointTemplate(points, destinationsData, offersData) {
-  const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
+function createWayPointTemplate(points, destinationsData, offers) {
+  const {basePrice, dateFrom, dateTo, destination, isFavorite, type } = points;
   const destinationObject = destinationsData.find((dest) => dest.id === destination);
   const favoriteClassName = isFavorite ? 'event__favorite-btn--active' : '';
   const startDateInForm = humanizeDate(dateFrom, DateFormat.DATE_IN_FORM);
@@ -48,7 +47,7 @@ function createWayPointTemplate(points, destinationsData, offersData) {
   const startDateShort = humanizeDate(dateFrom, DateFormat.DATE);
   const startTime = humanizeDate(dateFrom, DateFormat.TIME);
   const endTime = humanizeDate(dateTo, DateFormat.TIME);
-  const selectedOffersTemplate = createSelectedOffersTemplate(offersData);
+  const selectedOffersTemplate = createSelectedOffersTemplate(offers);
   return (
     `
     <li class="trip-events__item">
@@ -86,13 +85,13 @@ function createWayPointTemplate(points, destinationsData, offersData) {
 }
 
 export default class WayPoint extends AbstractView {
-  #points = null;
+  #point = null;
   #destinationsData = null;
   #offersData = null;
   #handleEventClick = null;
-  constructor({points, destinationsData, offersData, onEditClick}) {
+  constructor({point, destinationsData, offersData, onEditClick}) {
     super();
-    this.#points = points;
+    this.#point = point;
     this.#destinationsData = destinationsData;
     this.#offersData = offersData;
     this.#handleEventClick = onEditClick;
@@ -100,7 +99,7 @@ export default class WayPoint extends AbstractView {
   }
 
   get template() {
-    return createWayPointTemplate(this.#points, this.#destinationsData, this.#offersData);
+    return createWayPointTemplate(this.#point, this.#destinationsData, this.#offersData);
   }
 
   #editClickHandler = (evt) => {

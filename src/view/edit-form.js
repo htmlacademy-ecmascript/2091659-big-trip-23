@@ -4,8 +4,9 @@ import AbstractView from '../framework/view/abstract-view';
  * редактирование имеющеся точки маршрута
  * @returns {string} разметка формы
  */
-function createEditFormTemplate(points, destinationsData, offersData) {
-  const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
+//points, destinationsData, offersData
+function createEditFormTemplate() {
+  //const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
   return (
     `
     <form class="event event--edit" action="#" method="post">

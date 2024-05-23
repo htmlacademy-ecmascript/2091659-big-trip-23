@@ -28,12 +28,18 @@ export default class MainPresenter {
 
     this.#renderEditForm({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
 
-    for (let i = 0; i < this.#points.length; i++) {
-      this.#renderPoint({points:this.#points[i], destinationsData:this.#destinationsData, offersData:this.#offersData});
+    for (const point of this.#points) {
+      this.#renderPoint({point, destinationsData:this.#destinationsData});
     }
   }
 
-  #renderPoint ({points, destinationsData, offersData}) {
+  #prepareOffersToShow(point) {
+    const offers = this.#pointsModel.getOffersByType(point.type);
+    const idx = new Set(point.offers);
+    return offers.filter((offer)=>idx.has(offer.id))
+  }
+
+  #renderPoint ({point, destinationsData}) {
     const escKeyDownHandler = (evt) => {
       if (evt.key === 'Escape') {
         evt.preventDefault();
@@ -46,8 +52,8 @@ export default class MainPresenter {
     const onFormSubmit = () => replaceFormToPoint();
     const onFormCancel = () => replaceFormToPoint();
 
-    const pointComponent = new WayPoint({points, destinationsData, offersData, onEditClick: onEditClick,});
-    const formComponent = new EditForm({points, destinationsData, offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
+    const pointComponent = new WayPoint({point, destinationsData, offersData: this.#prepareOffersToShow(point), onEditClick: onEditClick,});
+    const formComponent = new EditForm({point, destinationsData, offersData: this.#offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
 
     function replacePointToForm() {
       replace(formComponent, pointComponent);
