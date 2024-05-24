@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view';
 
 /**
  *создание списка для точек маршрута
@@ -13,20 +13,8 @@ function createAddEventListTemplate() {
   );
 }
 
-export default class AddEventList {
-  getTemplate() {
+export default class AddEventList extends AbstractView {
+  get template() {
     return createAddEventListTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

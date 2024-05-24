@@ -1,7 +1,8 @@
+import {render} from './framework/render.js';
 import Filters from './view/filters.js';
 import MainPresenter from './presenter/main-presenter.js';
 import PointsModel from './model/points-model.js';
-import {render} from './render.js';
+
 
 const siteFilterElement = document.querySelector('.trip-controls__filters');
 const siteSortingElement = document.querySelector('.trip-events');

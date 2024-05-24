@@ -1,4 +1,4 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view';
 
 /**
  * форма создание новой точки маршрута
@@ -170,20 +170,8 @@ function createAddFormTemplate() {
     `);
 }
 
-export default class AddForm {
-  getTemplate() {
+export default class AddForm extends AbstractView {
+  get template() {
     return createAddFormTemplate();
-  }
-
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
-  }
-
-  removeElement() {
-    this.element = null;
   }
 }

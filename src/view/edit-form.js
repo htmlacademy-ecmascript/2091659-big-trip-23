@@ -1,10 +1,12 @@
-import {createElement} from '../render.js';
+import AbstractView from '../framework/view/abstract-view';
 
 /**
  * редактирование имеющеся точки маршрута
  * @returns {string} разметка формы
  */
+//points, destinationsData, offersData
 function createEditFormTemplate() {
+  //const {basePrice, dateFrom, dateTo, destination, isFavorite, offers, type } = points;
   return (
     `
     <form class="event event--edit" action="#" method="post">
@@ -163,20 +165,35 @@ function createEditFormTemplate() {
     `);
 }
 
-export default class EditForm {
-  getTemplate() {
-    return createEditFormTemplate();
+export default class EditForm extends AbstractView {
+  #points = null;
+  #destinationsData = null;
+  #offersData = null;
+  #handleFormSubmit = null;
+  #handleCloseEditFormButton = null;
+
+  constructor({points, destinationsData, offersData, onFormSubmit, onFormCancel}) {
+    super();
+    this.#points = points;
+    this.#destinationsData = destinationsData;
+    this.#offersData = offersData;
+    this.#handleFormSubmit = onFormSubmit;
+    this.#handleCloseEditFormButton = onFormCancel;
+    this.element.addEventListener('submit', this.#formSubmitHandler);
+    this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditFormButtonHandler);
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-
-    return this.element;
+  get template() {
+    return createEditFormTemplate(this.#points, this.#destinationsData, this.#offersData);
   }
 
-  removeElement() {
-    this.element = null;
-  }
+  #formSubmitHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleFormSubmit();
+  };
+
+  #closeEditFormButtonHandler = (evt) => {
+    evt.preventDefault();
+    this.#handleCloseEditFormButton();
+  };
 }

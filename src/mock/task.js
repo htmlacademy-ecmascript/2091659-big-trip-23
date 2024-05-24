@@ -1,21 +1,21 @@
 /**
- * Массив точек маршрута состоит из объектов
- * Объект - точка маршрута состоит из следующих полей
- * id: @param string
- * basePrice: @param number
- * dateFrom: @param string
- * dateTo: @param string
- * destination: @param string
- * isFavorite: @param boolean
- * offers: @param [string]
- * type: @param enum, string
+ * @type {Array<Point>} mockPoints - массив точек маршрута состоит из объектов точек маршрута
+ * @typedef {Object} Point -точка маршрута
+ * @property {string} id - id точки маршрута
+ * @property {number} basePrice - цена предложенного маршрута
+ * @property {string} dateFrom - дата начала тура
+ * @property {string} dateTo - дата завершения тура
+ * @property {string} destination - ключ (id) для получения точки назначения из массива mockDestinations
+ * @property {boolean} isFavorite - флаг пометки избранного
+ * @property {string[]} offers -ключи (id) для получения дополнительной услуги из mockOffers.offers
+ * @property {string} type -  enum  название типа предложений
  */
 const mockPoints = [
   {
     id: '1',
     basePrice: 1100,
-    dateFrom: '2019-07-10T22:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2019-07-10T20:55:56.845Z',
+    dateTo: '2019-07-11T10:22:13.375Z',
     destination: '1',
     isFavorite: false,
     offers: [
@@ -26,7 +26,7 @@ const mockPoints = [
   {
     id: '2',
     basePrice: 1200,
-    dateFrom: '2019-07-10T22:55:56.845Z',
+    dateFrom: '2019-07-11T21:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
     destination: '2',
     isFavorite: true,
@@ -38,8 +38,44 @@ const mockPoints = [
   {
     id: '3',
     basePrice: 1300,
-    dateFrom: '2019-07-10T22:55:56.845Z',
+    dateFrom: '2019-07-12T22:55:56.845Z',
+    dateTo: '2019-07-11T12:22:13.375Z',
+    destination: '3',
+    isFavorite: false,
+    offers: [
+      '3'
+    ],
+    type: 'train'
+  },
+  {
+    id: '4',
+    basePrice: 1100,
+    dateFrom: '2019-07-10T20:55:56.845Z',
+    dateTo: '2019-07-11T10:22:13.375Z',
+    destination: '1',
+    isFavorite: false,
+    offers: [
+      '1'
+    ],
+    type: 'taxi'
+  },
+  {
+    id: '5',
+    basePrice: 1200,
+    dateFrom: '2019-07-11T21:55:56.845Z',
     dateTo: '2019-07-11T11:22:13.375Z',
+    destination: '2',
+    isFavorite: true,
+    offers: [
+      '2'
+    ],
+    type: 'flight'
+  },
+  {
+    id: '6',
+    basePrice: 1300,
+    dateFrom: '2019-07-12T22:55:56.845Z',
+    dateTo: '2019-07-11T12:22:13.375Z',
     destination: '3',
     isFavorite: false,
     offers: [
@@ -50,27 +86,26 @@ const mockPoints = [
 ];
 
 /**
- * Массив дополнительных предложений.
- * Состоит из объектов
- * Объект "предложение" состоит из следующих полей
- * type: @param enumб, string
- * offers - @param array   массив
- * массив offers состоит из
- * id: @param string
- * title: @param string
- * price: @param number
+ * @type {Array<OfferByType>} mockOffers - массив предложения состоит из объектов
+ * @typedef {Object} OfferByType - предложение состоит из названия и массива дополнительных услуг для этого типа
+ * @property {string} type - название типа предложения
+ * @property {Array<offer>} offers - массив дополнительных услуг для этого предложения состоит из объектов
+ * @typedef {Object} offer - объект дополнительной услуги состоит
+ * @property {string} id - id дополнительной услуги
+ * @property {string} title - заголовок дополнительной услуги
+ * @property {number} price - цена дополнительной услуги
  */
 const mockOffers = [
   {
     type: 'taxi',
     offers:[
       {
-        id: 1,
+        id: '1',
         title: 'Business class',
         price: 500
       },
       {
-        id: 2,
+        id: '2',
         title: 'Economy class',
         price: 120
       },
@@ -80,12 +115,12 @@ const mockOffers = [
     type: 'flight',
     offers:[
       {
-        id: 1,
+        id: '1',
         title: 'Add food',
         price: 50
       },
       {
-        id: 2,
+        id: '2',
         title: 'Increase the weight of luggage',
         price: 120
       },
@@ -95,19 +130,35 @@ const mockOffers = [
     type: 'train',
     offers:[
       {
-        id: 1,
+        id: '1',
         title: 'Add food',
         price: 50
       },
       {
-        id: 2,
+        id: '2',
         title: 'Increase the weight of luggage',
         price: 120
+      },
+      {
+        id: '3',
+        title: 'Increase the weight of luggage',
+        price: 220
       },
     ]
   }
 ];
 
+/**
+ * @type {Array<Destinations>} mockDestinations - массив объектов точек назначений
+ * @typedef {Object} Destinations - точка назначения
+ * @property {string} id - id
+ * @property {string} description - описание точки назначения
+ * @property {string} name - название точки назначения
+ * @property {Array<picture>} pictures - изображения(картинки) точки назначения
+ * @typedef {Object} picture - изображение точки назначения
+ * @property {string} src - адрес до изображения
+ * @property {string} description - описание изображения
+ */
 const mockDestinations = [
   {
     id: '1',
