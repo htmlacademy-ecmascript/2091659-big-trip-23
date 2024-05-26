@@ -1,7 +1,7 @@
-import AddEventsList from '../view/add-events-list.js';
-import EditForm from '../view/edit-form.js';
-import WayPoint from '../view/way-point.js';
-import Sorting from '../view/sorting.js';
+import AddEventsList from '../view/add-events-list-view.js';
+import EditForm from '../view/edit-form-view.js';
+import WayPoint from '../view/way-point-view.js';
+import Sorting from '../view/sorting-view.js';
 import {render, replace} from '../framework/render.js';
 
 
@@ -26,7 +26,7 @@ export default class MainPresenter {
     render (this.#sorting, this.#container);
     render(this.#eventsList, this.#container);
 
-    this.#renderEditForm({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
+    //this.#renderEditForm({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
 
     for (const point of this.#points) {
       this.#renderPoint({point, destinationsData:this.#destinationsData});
