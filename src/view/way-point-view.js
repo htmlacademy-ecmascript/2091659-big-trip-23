@@ -1,6 +1,6 @@
-import AbstractView from '../framework/view/abstract-view';
+import AbstractView from '../framework/view/abstract-view.js';
 import {DateFormat} from '../const.js';
-import {humanizeDate} from '../utils/utils.js';
+import {calculateTripDuration, humanizeDate} from '../utils/utils.js';
 
 /**
  *
@@ -48,6 +48,7 @@ function createWayPointTemplate(points, destinationsData, offers) {
   const startTime = humanizeDate(dateFrom, DateFormat.TIME);
   const endTime = humanizeDate(dateTo, DateFormat.TIME);
   const selectedOffersTemplate = createSelectedOffersTemplate(offers);
+  const duration = calculateTripDuration(dateFrom,dateTo);
   return (
     `
     <li class="trip-events__item">
@@ -63,7 +64,7 @@ function createWayPointTemplate(points, destinationsData, offers) {
           &mdash;
           <time class="event__end-time" datetime="${endDateInForm}">${endTime}</time>
         </p>
-        <p class="event__duration">30M</p>
+        <p class="event__duration">${duration}</p>
       </div>
       <p class="event__price">
         &euro;&nbsp;<span class="event__price-value">${basePrice}</span>

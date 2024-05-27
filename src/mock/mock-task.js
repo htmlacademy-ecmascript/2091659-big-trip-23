@@ -14,8 +14,8 @@ const mockPoints = [
   {
     id: '1',
     basePrice: 1100,
-    dateFrom: '2019-07-10T20:55:56.845Z',
-    dateTo: '2019-07-11T10:22:13.375Z',
+    dateFrom: '2019-05-10T20:55:56.845Z',
+    dateTo: '2020-07-11T10:22:13.375Z',
     destination: '1',
     isFavorite: false,
     offers: [
@@ -26,8 +26,8 @@ const mockPoints = [
   {
     id: '2',
     basePrice: 1200,
-    dateFrom: '2019-07-11T21:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2022-02-11T21:55:56.845Z',
+    dateTo: '2023-04-12T11:22:13.375Z',
     destination: '2',
     isFavorite: true,
     offers: [
@@ -38,8 +38,8 @@ const mockPoints = [
   {
     id: '3',
     basePrice: 1300,
-    dateFrom: '2019-07-12T22:55:56.845Z',
-    dateTo: '2019-07-11T12:22:13.375Z',
+    dateFrom: '2024-010-12T22:55:56.845Z',
+    dateTo: '2024-12-13T12:22:13.375Z',
     destination: '3',
     isFavorite: false,
     offers: [
@@ -50,8 +50,8 @@ const mockPoints = [
   {
     id: '4',
     basePrice: 1100,
-    dateFrom: '2019-07-10T20:55:56.845Z',
-    dateTo: '2019-07-11T10:22:13.375Z',
+    dateFrom: '2024-08-10T20:55:56.845Z',
+    dateTo: '2025-09-11T21:42:13.375Z',
     destination: '1',
     isFavorite: false,
     offers: [
@@ -62,8 +62,8 @@ const mockPoints = [
   {
     id: '5',
     basePrice: 1200,
-    dateFrom: '2019-07-11T21:55:56.845Z',
-    dateTo: '2019-07-11T11:22:13.375Z',
+    dateFrom: '2024-02-11T21:55:56.845Z',
+    dateTo: '2024-05-14T11:45:13.375Z',
     destination: '2',
     isFavorite: true,
     offers: [
@@ -74,8 +74,8 @@ const mockPoints = [
   {
     id: '6',
     basePrice: 1300,
-    dateFrom: '2019-07-12T22:55:56.845Z',
-    dateTo: '2019-07-11T12:22:13.375Z',
+    dateFrom: '2024-05-26T09:55:56.845Z',
+    dateTo: '2024-05-26T23:22:13.375Z',
     destination: '3',
     isFavorite: false,
     offers: [
