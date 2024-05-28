@@ -1,14 +1,14 @@
 import AddEventsList from '../view/add-events-list-view.js';
-import EditForm from '../view/edit-form-view.js';
-import WayPoint from '../view/way-point-view.js';
-import Sorting from '../view/sorting-view.js';
+import EditFormView from '../view/edit-form-view.js';
+import WayPointView from '../view/way-point-view.js';
+import SortingView from '../view/sorting-view.js';
 import {render, replace} from '../framework/render.js';
 
 
 export default class MainPresenter {
   #container;
   #pointsModel;
-  #sorting = new Sorting();
+  #sorting = new SortingView();
   #eventsList = new AddEventsList();
   #points = [];
   #destinationsData = [];
@@ -52,8 +52,8 @@ export default class MainPresenter {
     const onFormSubmit = () => replaceFormToPoint();
     const onFormCancel = () => replaceFormToPoint();
 
-    const pointComponent = new WayPoint({point, destinationsData, offersData: this.#prepareOffersToShow(point), onEditClick: onEditClick,});
-    const formComponent = new EditForm({point, destinationsData, offersData: this.#offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
+    const pointComponent = new WayPointView({point, destinationsData, offersData: this.#prepareOffersToShow(point), onEditClick: onEditClick,});
+    const formComponent = new EditFormView({point, destinationsData, offersData: this.#offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
 
     function replacePointToForm() {
       replace(formComponent, pointComponent);
@@ -69,7 +69,7 @@ export default class MainPresenter {
   }
 
   #renderEditForm ({points, destinationsData, offersData}) {
-    const formComponent = new EditForm({points, destinationsData, offersData});
+    const formComponent = new EditFormView({points, destinationsData, offersData});
 
     render(formComponent, this.#eventsList.element);
   }

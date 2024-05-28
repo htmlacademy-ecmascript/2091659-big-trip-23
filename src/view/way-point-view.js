@@ -85,7 +85,7 @@ function createWayPointTemplate(points, destinationsData, offers) {
 `);
 }
 
-export default class WayPoint extends AbstractView {
+export default class WayPointView extends AbstractView {
   #point = null;
   #destinationsData = null;
   #offersData = null;

@@ -1,5 +1,5 @@
 import {render} from './framework/render.js';
-import Filters from './view/filters-view.js';
+import FiltersView from './view/filters-view.js';
 import MainPresenter from './presenter/main-presenter.js';
 import PointsModel from './model/points-model.js';
 import {generateFilter} from './mock/mock-filter.js';
@@ -13,6 +13,6 @@ pointsModel.init();
 const filters = generateFilter(pointsModel.points);
 
 const presenter = new MainPresenter({container: siteSortingElement, pointsModel: pointsModel});
-render(new Filters({filters}), siteFilterElement);
+render(new FiltersView({filters}), siteFilterElement);
 
 presenter.init();

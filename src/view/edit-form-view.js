@@ -165,7 +165,7 @@ function createEditFormTemplate() {
     `);
 }
 
-export default class EditForm extends AbstractView {
+export default class EditFormView extends AbstractView {
   #points = null;
   #destinationsData = null;
   #offersData = null;
