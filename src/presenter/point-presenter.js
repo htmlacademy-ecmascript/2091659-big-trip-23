@@ -15,15 +15,26 @@ export default class PointPresenter {
   #handleModeChange = null;
   #mode = Mode.DEFAULT;
 
-  constructor({pointListContainer, destinationsData, offersData, onDataChange, onModeChange}) {
+  constructor({pointListContainer, destinationsData, offersData, onDataChange, onModeChange, pointsModel}) {
     this.#pointListContainer = pointListContainer.element;
     this.#destinations = destinationsData;
     this.#offers = offersData;
     this.#handleDataChange = onDataChange;
     this.#handleModeChange = onModeChange;
+    this.#pointsModel = pointsModel;
   }
 
   init(point) {
+    this.#renderPoint(point, this.#destinations, this.#prepareOffersToShow(point));
+  }
+
+  #prepareOffersToShow(point) {
+    const offers = this.#pointsModel.getOffersByType(point.type);
+    const idx = new Set(point.offers);
+    return offers.filter((offer)=>idx.has(offer.id));
+  }
+
+  #renderPoint(point, destinations, offersData) {
     this.#point = point;
 
     const prevPointComponent = this.#pointComponent;
@@ -31,17 +42,19 @@ export default class PointPresenter {
 
     this.#pointComponent = new WayPointView({
       point: this.#point,
+      destinations,
       onEditClick: this.#handleEditClick,
       onFavoriteClick: this.#handleFavoriteClick,
       destinationsData: this.#destinations,
-      offersData: this.#offers,
+      offersData,
     });
     this.#formEditComponent = new EditFormView({
       point: this.#point,
+      destinations,
       onFormClick: this.#handleFormClick,
       onFormSubmit: this.#handleFormSubmit,
       destinationsData: this.#destinations,
-      offersData: this.#offers,
+      offersData,
     });
 
     if (prevPointComponent === null || prevFormEditComponent === null) {
@@ -59,12 +72,6 @@ export default class PointPresenter {
 
     remove(prevPointComponent);
     remove(prevFormEditComponent);
-  }
-
-  #prepareOffersToShow(point) {
-    const offers = this.#pointsModel.getOffersByType(point.type);
-    const idx = new Set(point.offers);
-    return offers.filter((offer)=>idx.has(offer.id));
   }
 
   #replacePointToForm() {

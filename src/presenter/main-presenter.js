@@ -79,6 +79,7 @@ export default class MainPresenter {
       pointListContainer: this.#eventsList,
       destinationsData: this.#destinationsData,
       offersData: this.#offersData,
+      pointsModel: this.#pointsModel,
       onDataChange: this.#handlePointChange,
       onModeChange: this.#handleModeChange,
     });
