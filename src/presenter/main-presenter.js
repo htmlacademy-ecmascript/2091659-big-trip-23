@@ -44,12 +44,6 @@ export default class MainPresenter {
     render(this.#sortView, this.#container);
   }
 
-  #prepareOffersToShow(point) {
-    const offers = this.#pointsModel.getOffersByType(point.type);
-    const idx = new Set(point.offers);
-    return offers.filter((offer)=>idx.has(offer.id));
-  }
-
   #renderPoints(from, to){
     this.#points.slice(from,to).forEach((point) => this.#renderPoint(point));
   }
