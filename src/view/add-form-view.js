@@ -170,7 +170,7 @@ function createAddFormTemplate() {
     `);
 }
 
-export default class AddForm extends AbstractView {
+export default class AddFormView extends AbstractView {
   get template() {
     return createAddFormTemplate();
   }

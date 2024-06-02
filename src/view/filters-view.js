@@ -34,7 +34,7 @@ function createFiltersListTemplate(filtersItems) {
  * @returns {string} разметка фильров
  */
 
-export default class Filters extends AbstractView {
+export default class FiltersView extends AbstractView {
   #filters = null;
 
   constructor({filters}) {

@@ -165,20 +165,20 @@ function createEditFormTemplate() {
     `);
 }
 
-export default class EditForm extends AbstractView {
+export default class EditFormView extends AbstractView {
   #points = null;
   #destinationsData = null;
   #offersData = null;
   #handleFormSubmit = null;
   #handleCloseEditFormButton = null;
 
-  constructor({points, destinationsData, offersData, onFormSubmit, onFormCancel}) {
+  constructor({points, destinationsData, offersData, onFormSubmit, onFormClick}) {
     super();
     this.#points = points;
     this.#destinationsData = destinationsData;
     this.#offersData = offersData;
     this.#handleFormSubmit = onFormSubmit;
-    this.#handleCloseEditFormButton = onFormCancel;
+    this.#handleCloseEditFormButton = onFormClick;
     this.element.addEventListener('submit', this.#formSubmitHandler);
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditFormButtonHandler);
   }

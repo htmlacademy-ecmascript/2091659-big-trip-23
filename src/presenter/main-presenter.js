@@ -1,15 +1,23 @@
-import AddEventsList from '../view/add-events-list-view.js';
-import EditForm from '../view/edit-form-view.js';
-import WayPoint from '../view/way-point-view.js';
-import Sorting from '../view/sorting-view.js';
-import {render, replace} from '../framework/render.js';
+import SortingView from '../view/sorting-view.js';
+import AddEventListView from '../view/add-events-list-view.js';
+import ListEmptyMessageView from '../view/list-empty-message-view.js';
+import PointPresenter from './point-presenter.js';
+import {render} from '../framework/render.js';
+import { updateItem, sortPointDay, sortPointTime, sortPointPrice } from '../utils/utils.js';
+import { SortType } from '../const.js';
 
 
 export default class MainPresenter {
-  #container;
-  #pointsModel;
-  #sorting = new Sorting();
-  #eventsList = new AddEventsList();
+  #container = null;
+  #pointsModel = null;
+  #pointPresenters = new Map();
+  #sourcedPoints = [];
+
+  #sortView = null;
+  #currentSortType = SortType.DAY;
+  #eventsList = new AddEventListView();
+  #noPointMessage = new ListEmptyMessageView();
+
   #points = [];
   #destinationsData = [];
   #offersData = [];
@@ -19,18 +27,21 @@ export default class MainPresenter {
     this.#pointsModel = pointsModel;
   }
 
-  init() {
+  init(){
     this.#points = [...this.#pointsModel.points];
+    this.#sourcedPoints = [...this.#pointsModel.points];
+
     this.#destinationsData = [...this.#pointsModel.destinations];
     this.#offersData = [...this.#pointsModel.offers];
-    render (this.#sorting, this.#container);
-    render(this.#eventsList, this.#container);
+    this.#renderMain();
+  }
 
-    //this.#renderEditForm({points:this.#points, destinationsData:this.#destinationsData, offersData:this.#offersData});
 
-    for (const point of this.#points) {
-      this.#renderPoint({point, destinationsData:this.#destinationsData});
-    }
+  #renderSort() {
+    this.#sortView = new SortingView({
+      onSortTypeChange: this.#handleSortTypeChange
+    });
+    render(this.#sortView, this.#container);
   }
 
   #prepareOffersToShow(point) {
@@ -39,38 +50,87 @@ export default class MainPresenter {
     return offers.filter((offer)=>idx.has(offer.id));
   }
 
-  #renderPoint ({point, destinationsData}) {
-    const escKeyDownHandler = (evt) => {
-      if (evt.key === 'Escape') {
-        evt.preventDefault();
-        replaceFormToPoint();
-        document.removeEventListener('keydown', escKeyDownHandler);
-      }
-    };
-
-    const onEditClick = () => replacePointToForm();
-    const onFormSubmit = () => replaceFormToPoint();
-    const onFormCancel = () => replaceFormToPoint();
-
-    const pointComponent = new WayPoint({point, destinationsData, offersData: this.#prepareOffersToShow(point), onEditClick: onEditClick,});
-    const formComponent = new EditForm({point, destinationsData, offersData: this.#offersData, onFormSubmit: onFormSubmit, onFormCancel: onFormCancel,});
-
-    function replacePointToForm() {
-      replace(formComponent, pointComponent);
-      document.addEventListener('keydown', escKeyDownHandler);
-    }
-
-    function replaceFormToPoint() {
-      replace(pointComponent, formComponent);
-      document.removeEventListener('keydown', escKeyDownHandler);
-    }
-
-    render(pointComponent, this.#eventsList.element);
+  #renderPoints(from, to){
+    this.#points.slice(from,to).forEach((point) => this.#renderPoint(point));
   }
 
-  #renderEditForm ({points, destinationsData, offersData}) {
-    const formComponent = new EditForm({points, destinationsData, offersData});
-
-    render(formComponent, this.#eventsList.element);
+  #renderNoPoints(){
+    render(this.#noPointMessage, this.#eventsList.element);
   }
+
+  #renderPointList() {
+    render(this.#eventsList, this.#container);
+    this.#renderPoints(0,this.#points.length);
+  }
+
+  #renderMain(){
+
+    if (this.#points.length === 0){
+      this.#renderNoPoints();
+      return;
+    }
+    this.#renderSort();
+    this.#renderPointList();
+
+  }
+
+  #renderPoint(point) {
+    const pointPresenter = new PointPresenter({
+      pointListContainer: this.#eventsList,
+      destinationsData: this.#destinationsData,
+      offersData: this.#offersData,
+      pointsModel: this.#pointsModel,
+      onDataChange: this.#handlePointChange,
+      onModeChange: this.#handleModeChange,
+    });
+    pointPresenter.init(point);
+    this.#pointPresenters.set(point.id, pointPresenter);
+  }
+
+  #sortPoints(sortType) {
+    switch (sortType) {
+      case SortType.DAY:
+        this.#points.sort(sortPointDay);
+        break;
+      case SortType.PRICE:
+        this.#points.sort(sortPointPrice);
+        break;
+      case SortType.TIME:
+        this.#points.sort(sortPointTime);
+        break;
+      default:
+        this.#points = [...this.#sourcedPoints];
+    }
+
+    this.#currentSortType = sortType;
+  }
+
+  #handlePointChange = (updatedPoint) => {
+    this.#points = updateItem(this.#points, updatedPoint);
+    this.#sourcedPoints = updateItem(this.#sourcedPoints, updatedPoint);
+    this.#pointPresenters.get(updatedPoint.id).init(updatedPoint);
+  };
+
+  #handleModeChange = () => {
+    this.#pointPresenters.forEach((presenter) => presenter.resetView());
+  };
+
+  #handleSortTypeChange = (sortType) => {
+    if(this.#currentSortType === sortType){
+      return;
+    }
+
+    this.#sortPoints(sortType);
+    this.#clearPointList();
+    this.#renderPointList();
+    // - Сортируем задачи
+    // - Очищаем список
+    // - Рендерим список заново
+  };
+
+  #clearPointList() {
+    this.#pointPresenters.forEach((presenter) => presenter.destroy());
+    this.#pointPresenters.clear();
+  }
+
 }
