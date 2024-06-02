@@ -31,9 +31,14 @@ const Timing = {
 const MSEC_IN_HOUR = Timing.MIN_IN_HOUR * Timing.SEC_IN_MIN * Timing.MSEC_IN_SEC;
 const MSEC_IN_DAY = Timing.HOUR_IN_DAY * MSEC_IN_HOUR;
 
-const Mode = {
+const Mode = Object.freeze({
   DEFAULT: 'DEFAULT',
   EDITING: 'EDITING',
+});
+
+const CSSClass = {
+  FAVORITE: 'event__favorite-btn',
+  FAVORITE_ACTIVE: 'event__favorite-btn--active',
 };
 
-export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType };
+export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass };
