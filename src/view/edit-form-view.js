@@ -82,7 +82,7 @@ function createEditFormTemplate(point, offerData, destinationData) {
             <input class="event__input  event__input--time" id="event-start-time-${eventId}" type="text" name="event-start-time" value="${humanizeDate(dateFrom, DateFormat.DATE_IN_FORM)}">
             &mdash;
             <label class="visually-hidden" for="event-end-time-${eventId}">To</label>
-            <input class="event__input  event__input--time" id="event-end-time-${eventId}" type="text" name="event-end-time" value="${humanizeDate(dateFrom, DateFormat.DATE_IN_FORM)}">
+            <input class="event__input  event__input--time" id="event-end-time-${eventId}" type="text" name="event-end-time" value="${humanizeDate(dateTo, DateFormat.DATE_IN_FORM)}">
           </div>
           <div class="event__field-group  event__field-group--price">
             <label class="event__label" for="event-price-${eventId}"><span class="visually-hidden">Price</span>&euro;</label>
