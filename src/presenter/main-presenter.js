@@ -39,15 +39,10 @@ export default class MainPresenter {
 
   #renderSort() {
     this.#sortView = new SortingView({
-      onSortTypeChange: this.#handleSortTypeChange
+      currentSortType: this.#currentSortType,
+      onSortTypeChange: this.#handleSortTypeChange,
     });
     render(this.#sortView, this.#container);
-  }
-
-  #prepareOffersToShow(point) {
-    const offers = this.#pointsModel.getOffersByType(point.type);
-    const idx = new Set(point.offers);
-    return offers.filter((offer)=>idx.has(offer.id));
   }
 
   #renderPoints(from, to){

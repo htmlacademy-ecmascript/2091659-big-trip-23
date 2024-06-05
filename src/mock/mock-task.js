@@ -38,7 +38,7 @@ const mockPoints = [
   {
     id: '3',
     basePrice: 1300,
-    dateFrom: '2024-010-12T22:55:56.845Z',
+    dateFrom: '2024-10-12T22:55:56.845Z',
     dateTo: '2024-12-13T12:22:13.375Z',
     destination: '3',
     isFavorite: false,
