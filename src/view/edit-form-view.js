@@ -104,15 +104,15 @@ function createEditFormTemplate(point, offerData, destinationData) {
 }
 
 export default class EditFormView extends AbstractStatefulView {
-  #points = null;
+  #point = null;
   #destinationsData = null;
   #offersData = null;
   #handleFormSubmit = null;
   #handleCloseEditFormButton = null;
 
-  constructor(points, destinationsData, offersData, {onFormSubmit, onFormClick}) {
+  constructor({point, destinationsData, offersData, onFormSubmit, onFormClick}) {
     super();
-    this.#points = points;
+    this.#point = point;
     this.#destinationsData = destinationsData;
     this.#offersData = offersData;
     this.#handleFormSubmit = onFormSubmit;
@@ -122,7 +122,7 @@ export default class EditFormView extends AbstractStatefulView {
   }
 
   get template() {
-    return createEditFormTemplate(this.#points, this.#destinationsData, this.#offersData);
+    return createEditFormTemplate(this.#point, this.#offersData, this.#destinationsData);
   }
 
   _restoreHandlers() {
