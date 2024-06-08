@@ -74,7 +74,7 @@ function createEditFormTemplate(point, offerData, destinationData) {
             <label class="event__label  event__type-output" for="event-destination-${eventId}">${type}</label>
             <input class="event__input  event__input--destination" id="event-destination-${eventId}" type="text" name="event-destination" value="${name}" list="destination-list-${eventId}">
             <datalist id="destination-list-${eventId}">
-              ${destinationData.map((elem) => createEventDestinationList(elem.name))}
+              ${destinationData.map((destination) => createEventDestinationList(destination.name))}
             </datalist>
           </div>
           <div class="event__field-group  event__field-group--time">
@@ -112,6 +112,7 @@ export default class EditFormView extends AbstractStatefulView {
 
   constructor({point, destinationsData, offersData, onFormSubmit, onFormClick}) {
     super();
+    this._setState(EditFormView.parsePointToState(point));
     this.#point = point;
     this.#destinationsData = destinationsData;
     this.#offersData = offersData;
@@ -122,21 +123,61 @@ export default class EditFormView extends AbstractStatefulView {
   }
 
   get template() {
-    return createEditFormTemplate(this.#point, this.#offersData, this.#destinationsData);
+    return createEditFormTemplate(this._state, this.#offersData, this.#destinationsData);
   }
 
   _restoreHandlers() {
     this.element.addEventListener('submit', this.#formSubmitHandler);
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditFormButtonHandler);
+    this.element.querySelector('.event__type-group').addEventListener('change', this.#eventTypeChangeHandler);
+    this.element.querySelector('.event__input--destination').addEventListener('change', this.#destinationChangeHandler);
   }
+
+  #destinationChangeHandler = (evt) => {
+    evt.preventDefault();
+    const currentDestination = this.#destinationsData.find((elem) => elem.id === this._state.destination);
+    const checkedDestination = this.#destinationsData.find((elem) => elem.name === evt.target.value);
+    if(!checkedDestination) {
+      return;
+    } if(checkedDestination) {
+      this.updateElement({
+        destination: checkedDestination.id,
+      });
+    } else {
+      this.updateElement({
+        destination: currentDestination.id,
+      });
+    }
+  };
+
+  #eventTypeChangeHandler = (evt) => {
+    evt.preventDefault();
+    this.updateElement({
+      type: evt.target.value,
+      offersData: [],
+    });
+  };
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit();
+    this.#handleFormSubmit(EditFormView.parseStatetoPoint(this._state));
   };
 
   #closeEditFormButtonHandler = (evt) => {
     evt.preventDefault();
     this.#handleCloseEditFormButton();
   };
+
+  reset(point) {
+    this.updateElement(EditFormView.parsePointToState(point));
+  }
+
+  static parsePointToState(point) {
+    return {...point};
+  }
+
+  static parseStateToPoint(state) {
+    const point = {...state};
+    return point;
+  }
 }
