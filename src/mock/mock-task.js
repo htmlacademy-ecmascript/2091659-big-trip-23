@@ -116,12 +116,12 @@ const mockOffers = [
     offers:[
       {
         id: '1',
-        title: 'Business class',
+        title: 'Additional meals',
         price: 500
       },
       {
         id: '2',
-        title: 'Economy class',
+        title: 'notify about the stop',
         price: 120
       },
     ]
@@ -131,12 +131,12 @@ const mockOffers = [
     offers:[
       {
         id: '1',
-        title: 'Business class',
+        title: 'separate cabin',
         price: 500
       },
       {
         id: '2',
-        title: 'Economy class',
+        title: 'access to the pool',
         price: 120
       },
     ]
@@ -146,12 +146,12 @@ const mockOffers = [
     offers:[
       {
         id: '1',
-        title: 'Business class',
+        title: 'additional 200km of mileage',
         price: 500
       },
       {
         id: '2',
-        title: 'Economy class',
+        title: 'roof rack',
         price: 120
       },
     ]
@@ -161,7 +161,7 @@ const mockOffers = [
     offers:[
       {
         id: '1',
-        title: 'Add food',
+        title: 'window seat',
         price: 50
       },
       {
@@ -181,7 +181,7 @@ const mockOffers = [
       },
       {
         id: '2',
-        title: 'Increase the weight of luggage',
+        title: 'sleeping place',
         price: 120
       },
       {
