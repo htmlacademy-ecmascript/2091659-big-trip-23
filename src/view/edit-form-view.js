@@ -131,7 +131,18 @@ export default class EditFormView extends AbstractStatefulView {
     this.element.querySelector('.event__rollup-btn').addEventListener('click', this.#closeEditFormButtonHandler);
     this.element.querySelector('.event__type-group').addEventListener('change', this.#eventTypeChangeHandler);
     this.element.querySelector('.event__input--destination').addEventListener('change', this.#destinationChangeHandler);
+    this.element.querySelector('.event__input--price').addEventListener('change', this.#priceChangeHandler);
   }
+
+  #priceChangeHandler = (evt) => {
+    const newBasePrice = Number(evt.target.value);
+
+    if (newBasePrice) {
+      this._setState({
+        basePrice: newBasePrice,
+      });
+    }
+  };
 
   #destinationChangeHandler = (evt) => {
     evt.preventDefault();
@@ -139,7 +150,8 @@ export default class EditFormView extends AbstractStatefulView {
     const checkedDestination = this.#destinationsData.find((elem) => elem.name === evt.target.value);
     if(!checkedDestination) {
       return;
-    } if(checkedDestination) {
+    }
+    if(checkedDestination) {
       this.updateElement({
         destination: checkedDestination.id,
       });
