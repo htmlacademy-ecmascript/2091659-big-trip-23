@@ -1,6 +1,8 @@
 import AbstractStatefulView from '../framework/view/abstract-stateful-view.js';
 import {firstLetterUpperCase, humanizeDate} from '../utils/utils.js';
 import {DateFormat, EventTypes} from '../const.js';
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 /**
  * редактирование имеющеся точки маршрута
  * @returns {string} разметка формы
