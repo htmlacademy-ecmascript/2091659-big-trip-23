@@ -82,6 +82,18 @@ const mockPoints = [
       '3'
     ],
     type: 'flight'
+  },
+  {
+    id: '7',
+    basePrice: 1300,
+    dateFrom: '2024-05-26T09:55:56.845Z',
+    dateTo: '2024-05-26T23:22:13.375Z',
+    destination: '5',
+    isFavorite: false,
+    offers: [
+      '3'
+    ],
+    type: 'check-in'
   }
 ];
 
@@ -190,6 +202,26 @@ const mockOffers = [
         price: 220
       },
     ]
+  },
+  {
+    type: 'check-in',
+    offers:[
+      {
+        id: '1',
+        title: '1111',
+        price: 50
+      },
+      {
+        id: '2',
+        title: '22222',
+        price: 120
+      },
+      {
+        id: '3',
+        title: '33333',
+        price: 220
+      },
+    ]
   }
 ];
 
@@ -268,6 +300,12 @@ const mockDestinations = [
           'photo-1',
       },
     ],
+  },
+  {
+    id: '5',
+    description: 'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.',
+    name: 'New Dely',
+    pictures: [],
   }
 ];
 
