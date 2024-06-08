@@ -33,7 +33,7 @@ const mockPoints = [
     offers: [
       '2'
     ],
-    type: 'flight'
+    type: 'bus'
   },
   {
     id: '3',
@@ -57,7 +57,7 @@ const mockPoints = [
     offers: [
       '1'
     ],
-    type: 'taxi'
+    type: 'ship'
   },
   {
     id: '5',
@@ -69,19 +69,19 @@ const mockPoints = [
     offers: [
       '2'
     ],
-    type: 'flight'
+    type: 'drive'
   },
   {
     id: '6',
     basePrice: 1300,
     dateFrom: '2024-05-26T09:55:56.845Z',
     dateTo: '2024-05-26T23:22:13.375Z',
-    destination: '3',
+    destination: '4',
     isFavorite: false,
     offers: [
       '3'
     ],
-    type: 'train'
+    type: 'flight'
   }
 ];
 
@@ -98,6 +98,51 @@ const mockPoints = [
 const mockOffers = [
   {
     type: 'taxi',
+    offers:[
+      {
+        id: '1',
+        title: 'Business class',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'Economy class',
+        price: 120
+      },
+    ]
+  },
+  {
+    type: 'bus',
+    offers:[
+      {
+        id: '1',
+        title: 'Business class',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'Economy class',
+        price: 120
+      },
+    ]
+  },
+  {
+    type: 'ship',
+    offers:[
+      {
+        id: '1',
+        title: 'Business class',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'Economy class',
+        price: 120
+      },
+    ]
+  },
+  {
+    type: 'drive',
     offers:[
       {
         id: '1',
