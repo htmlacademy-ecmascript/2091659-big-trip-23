@@ -43,4 +43,16 @@ const CSSClass = {
   FAVORITE_ACTIVE: 'event__favorite-btn--active',
 };
 
-export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes };
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
+
+export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType };
