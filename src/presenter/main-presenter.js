@@ -36,6 +36,10 @@ export default class MainPresenter {
     this.#renderMain();
   }
 
+  get points() {
+    return this.#points;
+  }
+
 
   #renderSort() {
     this.#sortView = new SortingView({
