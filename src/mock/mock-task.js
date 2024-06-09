@@ -33,7 +33,7 @@ const mockPoints = [
     offers: [
       '2'
     ],
-    type: 'flight'
+    type: 'bus'
   },
   {
     id: '3',
@@ -57,7 +57,7 @@ const mockPoints = [
     offers: [
       '1'
     ],
-    type: 'taxi'
+    type: 'ship'
   },
   {
     id: '5',
@@ -69,19 +69,31 @@ const mockPoints = [
     offers: [
       '2'
     ],
-    type: 'flight'
+    type: 'drive'
   },
   {
     id: '6',
     basePrice: 1300,
     dateFrom: '2024-05-26T09:55:56.845Z',
     dateTo: '2024-05-26T23:22:13.375Z',
-    destination: '3',
+    destination: '4',
     isFavorite: false,
     offers: [
       '3'
     ],
-    type: 'train'
+    type: 'flight'
+  },
+  {
+    id: '7',
+    basePrice: 1300,
+    dateFrom: '2024-05-26T09:55:56.845Z',
+    dateTo: '2024-05-26T23:22:13.375Z',
+    destination: '5',
+    isFavorite: false,
+    offers: [
+      '3'
+    ],
+    type: 'check-in'
   }
 ];
 
@@ -112,11 +124,56 @@ const mockOffers = [
     ]
   },
   {
+    type: 'bus',
+    offers:[
+      {
+        id: '1',
+        title: 'Additional meals',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'notify about the stop',
+        price: 120
+      },
+    ]
+  },
+  {
+    type: 'ship',
+    offers:[
+      {
+        id: '1',
+        title: 'separate cabin',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'access to the pool',
+        price: 120
+      },
+    ]
+  },
+  {
+    type: 'drive',
+    offers:[
+      {
+        id: '1',
+        title: 'additional 200km of mileage',
+        price: 500
+      },
+      {
+        id: '2',
+        title: 'roof rack',
+        price: 120
+      },
+    ]
+  },
+  {
     type: 'flight',
     offers:[
       {
         id: '1',
-        title: 'Add food',
+        title: 'window seat',
         price: 50
       },
       {
@@ -136,12 +193,32 @@ const mockOffers = [
       },
       {
         id: '2',
-        title: 'Increase the weight of luggage',
+        title: 'sleeping place',
         price: 120
       },
       {
         id: '3',
         title: 'Increase the weight of luggage',
+        price: 220
+      },
+    ]
+  },
+  {
+    type: 'check-in',
+    offers:[
+      {
+        id: '1',
+        title: '1111',
+        price: 50
+      },
+      {
+        id: '2',
+        title: '22222',
+        price: 120
+      },
+      {
+        id: '3',
+        title: '33333',
         price: 220
       },
     ]
@@ -223,6 +300,12 @@ const mockDestinations = [
           'photo-1',
       },
     ],
+  },
+  {
+    id: '5',
+    description: 'Aliquam erat volutpat. Nunc fermentum tortor ac porta dapibus. In rutrum ac purus sit amet tempus.',
+    name: 'New Dely',
+    pictures: [],
   }
 ];
 
