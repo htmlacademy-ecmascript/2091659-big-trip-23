@@ -62,4 +62,15 @@ const emptyMessageTextType = {
   [FilterType.PAST]: 'There are no past events now',
 };
 
-export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType, emptyMessageTextType };
+const BLANK_POINT = {
+  id: '0',
+  type: 'taxi',
+  destination: 1,
+  offers: [],
+  basePrice: '',
+  isFavorite: false,
+  dateFrom: '',
+  dateTo: '',
+};
+
+export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType, emptyMessageTextType, BLANK_POINT };
