@@ -55,4 +55,11 @@ const UpdateType = {
   MAJOR: 'MAJOR',
 };
 
-export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType };
+const emptyMessageTextType = {
+  [FilterType.EVERYTHING]: 'Click New Event to create your first point',
+  [FilterType.FUTURE]: 'There are no future events now',
+  [FilterType.PRESENT]: 'There are no present events now',
+  [FilterType.PAST]: 'There are no past events now',
+};
+
+export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType, emptyMessageTextType };
