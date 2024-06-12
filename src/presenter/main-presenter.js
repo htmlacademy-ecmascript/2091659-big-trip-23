@@ -149,7 +149,7 @@ export default class MainPresenter {
     if (resetSortType) {
       this.#currentSortType = SortType.DEFAULT;
     }
-  };
+  }
 
   #handleViewAction = (actionType, updateType, update) => {
     switch (actionType) {
