@@ -1,7 +1,7 @@
 import {render, replace, remove} from '../framework/render.js';
 import WayPointView from '../view/way-point-view.js';
 import EditFormView from '../view/edit-form-view.js';
-import {Mode} from '../const.js';
+import {Mode, UserAction, UpdateType,} from '../const.js';
 
 export default class PointPresenter {
   #pointsModel;
@@ -25,7 +25,8 @@ export default class PointPresenter {
   }
 
   init(point) {
-    this.#renderPoint(point, this.#destinations, this.#prepareOffersToShow(point));
+    this.#renderPoint(point, this.#destinations);
+    //this.#destinations, this.#prepareOffersToShow(point)
   }
 
   #prepareOffersToShow(point) {
@@ -34,7 +35,7 @@ export default class PointPresenter {
     return offers.filter((offer)=>idx.has(offer.id));
   }
 
-  #renderPoint(point, destinations, offersData) {
+  #renderPoint(point, destinations) {
     this.#point = point;
 
     const prevPointComponent = this.#pointComponent;
@@ -42,17 +43,17 @@ export default class PointPresenter {
 
     this.#pointComponent = new WayPointView({
       point: this.#point,
-      destinations,
       onEditClick: this.#handleEditClick,
       onFavoriteClick: this.#handleFavoriteClick,
       destinationsData: this.#destinations,
-      offersData,
+      offersData: this.#offers,
     });
     this.#formEditComponent = new EditFormView({
       point: this.#point,
       destinations,
       onFormClick: this.#handleFormClick,
       onFormSubmit: this.#handleFormSubmit,
+      onDeleteClick: this.#handleDeleteClick,
       destinationsData: this.#destinations,
       offersData: this.#offers,
     });
@@ -111,6 +112,10 @@ export default class PointPresenter {
   #handleFormSubmit = (point) => {
     this.#handleDataChange(point);
     this.#replaceFormToPoint();
+  };
+
+  #handleDeleteClick = (point) => {
+    this.#handleDataChange(UserAction.DELETE_POINT, UpdateType.MINOR, point);
   };
 
   resetView() {

@@ -43,4 +43,34 @@ const CSSClass = {
   FAVORITE_ACTIVE: 'event__favorite-btn--active',
 };
 
-export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes };
+const UserAction = {
+  UPDATE_POINT: 'UPDATE_POINT',
+  ADD_POINT: 'ADD_POINT',
+  DELETE_POINT: 'DELETE_POINT',
+};
+
+const UpdateType = {
+  PATCH: 'PATCH',
+  MINOR: 'MINOR',
+  MAJOR: 'MAJOR',
+};
+
+const emptyMessageTextType = {
+  [FilterType.EVERYTHING]: 'Click New Event to create your first point',
+  [FilterType.FUTURE]: 'There are no future events now',
+  [FilterType.PRESENT]: 'There are no present events now',
+  [FilterType.PAST]: 'There are no past events now',
+};
+
+const BLANK_POINT = {
+  id: '0',
+  type: 'taxi',
+  destination: 1,
+  offers: [],
+  basePrice: '',
+  isFavorite: false,
+  dateFrom: '',
+  dateTo: '',
+};
+
+export { DateFormat, FilterType, MSEC_IN_HOUR ,MSEC_IN_DAY, Mode, SortType, CSSClass, EventTypes, UserAction, UpdateType, emptyMessageTextType, BLANK_POINT };
