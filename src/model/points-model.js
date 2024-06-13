@@ -5,6 +5,7 @@ export default class PointsModel extends Observable {
   #points = [];
   #offers = [];
   #destinations = [];
+  #types = [];
   constructor() {
     super();
     this.#points = [];
@@ -16,6 +17,7 @@ export default class PointsModel extends Observable {
     this.#points = mockPoints;
     this.#offers = mockOffers;
     this.#destinations = mockDestinations;
+    this.#types = this.#offers.map((offer) => offer.type);
   }
 
   get points() {
@@ -28,6 +30,22 @@ export default class PointsModel extends Observable {
 
   get destinations() {
     return this.#destinations;
+  }
+
+  get types() {
+    return this.#types;
+  }
+
+  getDestinationById(id) {
+    return this.destinations.find((element) => element.id === id) || [];
+  }
+
+  getDestinationByName(name) {
+    return this.destinations.find((element) => element.name === name) || [];
+  }
+
+  getOffersByType(type) {
+    return this.#offers.find((offer) => offer.type === type).offers || [];
   }
 
   updatePoint(updateType, update) {
@@ -83,8 +101,4 @@ export default class PointsModel extends Observable {
 
     return adaptedPoint;
   };
-
-  getOffersByType(type) {
-    return this.#offers.find((offer) => offer.type === type).offers;
-  }
 }

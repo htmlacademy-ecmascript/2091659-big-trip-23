@@ -109,4 +109,6 @@ function sortPointPrice(pointA, pointB) {
   return weight ?? pointB.basePrice - pointA.basePrice;
 }
 
-export {calculateTripDuration, getRandomArrayElement, humanizeDate, formatFullDate, formatShortDate, formatTime, isPastDate, isPresentDate, isFutureDate, firstLetterUpperCase, updateItem, sortPointDay, sortPointTime, sortPointPrice};
+const getCurrentDestination = (destinationId,destination) => destination.find((element) => element.id === destinationId);
+
+export {calculateTripDuration, getRandomArrayElement, humanizeDate, formatFullDate, formatShortDate, formatTime, isPastDate, isPresentDate, isFutureDate, firstLetterUpperCase, updateItem, sortPointDay, sortPointTime, sortPointPrice, getCurrentDestination};

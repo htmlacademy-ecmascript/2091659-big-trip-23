@@ -8,10 +8,10 @@ import 'flatpickr/dist/flatpickr.min.css';
  * редактирование имеющеся точки маршрута
  * @returns {string} разметка формы
  */
-//points, destinationsData, offersData
+//point, destinationsData, offersData
 function createEditFormTemplate(point, offerData, destinationData) {
   const {basePrice, dateFrom, dateTo, type} = point;
-  const typeOffers = offerData.find((elem) => elem.type === point.type).offers;
+  const typeOffers = offerData.find((offer) => offer.type === type)?.offers ?? [];
   const selectedOffers = typeOffers.filter((typeOffer) => point.offers.includes(typeOffer.id));
   const destinationPoint = destinationData.find((elem) => elem.id === point.destination) || {};
   const {name = '', description = '', pictures = []} = destinationPoint;
@@ -195,7 +195,7 @@ export default class EditFormView extends AbstractStatefulView {
 
   #formSubmitHandler = (evt) => {
     evt.preventDefault();
-    this.#handleFormSubmit(EditFormView.parseStatetoPoint(this._state));
+    this.#handleFormSubmit(EditFormView.parseStateToPoint(this._state));
   };
 
   #formDeleteClickHandler = (evt) => {
@@ -258,6 +258,9 @@ export default class EditFormView extends AbstractStatefulView {
 
   static parseStateToPoint(state) {
     const point = {...state};
+    delete point.isDisabled;
+    delete point.isSaving;
+    delete point.isDeleting;
     return point;
   }
 }

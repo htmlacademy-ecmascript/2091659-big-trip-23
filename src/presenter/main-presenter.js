@@ -87,7 +87,7 @@ export default class MainPresenter {
 
   #renderPointList() {
     render(this.#eventsList, this.#container);
-    this.#renderPoints(0,this.points.length);
+    this.#renderPoints(this.points);
   }
 
   #renderMain(){
